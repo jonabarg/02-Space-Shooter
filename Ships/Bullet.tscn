@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Ships/Bullet.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Shield.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 12.0
+
+[node name="Bullet" type="KinematicBody2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.0745098, 0.109804, 0.917647, 1 )
+position = Vector2( 0.5, -3.5 )
+scale = Vector2( 0.01, 0.05 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0.5, -3.5 )
+scale = Vector2( 0.01, 0.05 )
+polygon = PoolVector2Array( 31, -271.9, 31, -270.7, 56, -266.7, 56, -265.5, 100, -253.5, 100, -252.4, 127, -241.3, 127, -240.1, 165, -218.2, 165, -217, 185, -202, 185, -200.8, 208, -178.9, 208, -176.7, 241, -134.7, 241, -132.5, 260, -98.5, 260, -95.4, 270, -73.4, 270, -70.3, 283, -31.3, 283, -26, 289, -2.20001, 289, 5, 294, 36.8, 294, 61, 295.2, 76, 293.9, 76, 289.9, 131, 288.7, 131, 278.6, 178, 277.4, 178, 262.4, 220, 261.1, 220, 231.2, 273, 230, 273, 207, 303, 205.8, 303, 164.8, 342, 162.5, 342, 126.6, 367, 124.4, 367, 71.4, 391, 67.1, 391, 18.2, 403, 10.1, 403, -43, 406.1, -43, 404.9, -92, 400.8, -92, 399.6, -141, 388.6, -141, 387.4, -181, 373.4, -181, 372.2, -227, 349.2, -227, 348.1, -267, 321.1, -267, 319.9, -309, 280.9, -309, 278.7, -333, 251.8, -333, 249.6, -361, 206.6, -361, 204.5, -379, 166.4, -379, 163.3, -395, 108.3, -395, 102, -400, 66.1, -400, 28.9, -397.8, 6, -396.7, 6, -389.7, -36, -388.4, -36, -373.5, -82, -372.3, -82, -354.3, -119, -353, -119, -323, -161, -321.9, -161, -296.9, -188, -294.7, -188, -250.7, -223, -248.5, -223, -215.5, -242, -212.6, -242, -168.4, -260, -164, -260, -112.2, -272, -105.2, -272, -56, -275.9, -56, -277.1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2( 0.4, 1.6 )
+shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

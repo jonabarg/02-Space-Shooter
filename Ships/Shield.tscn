@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Ships/Shield.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Shield.png" type="Texture" id=2]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 35.0
+
+[node name="Shield" type="KinematicBody2D"]
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+light_mask = 2
+scale = Vector2( 2.2, 2.2 )
+polygon = PoolVector2Array( 0, 28, 7, 27, 14, 24, 20, 19, 25, 13, 27, 6, 28, 0, 27, -6, 25, -12, 22, -17, 17, -22, 10, -26, 4, -27, 0, -28, 0, -29, 5, -29, 11, -27, 16, -24, 21, -20, 25, -15, 27, -10, 28, -6, 29, -1, 28, 6, 27, 10, 25, 14, 21, 19, 16, 24, 7, 28, 0, 29 )
+disabled = true
+
+[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="."]
+light_mask = 2
+rotation = 3.14159
+scale = Vector2( 2.2, 2.2 )
+polygon = PoolVector2Array( 0, 28, 7, 27, 14, 24, 20, 19, 25, 13, 27, 6, 28, 0, 27, -6, 25, -12, 22, -17, 17, -22, 10, -26, 4, -27, 0, -28, 0, -29, 5, -29, 11, -27, 16, -24, 21, -20, 25, -15, 27, -10, 28, -6, 29, -1, 28, 6, 27, 10, 25, 14, 21, 19, 16, 24, 7, 28, 0, 29 )
+disabled = true
+one_way_collision_margin = 0.0
+
+[node name="Sprite" type="Sprite" parent="."]
+visible = false
+position = Vector2( 1.90735e-06, 1.90735e-06 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
+offset = Vector2( 43, -65 )
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2( 2, 2 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource( 1 )
+one_way_collision_margin = 0.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
